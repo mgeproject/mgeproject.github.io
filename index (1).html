@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МГЕ Science Portal</title>
+    <link rel="icon" type="image/png" href="logo.ico">
+    <style>
+        :root {
+            --neon-green: #39ff14;
+            --dark-bg: #050505;
+            --panel-bg: #111;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--neon-green);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            text-shadow: 0 0 5px var(--neon-green), 0 0 15px var(--neon-green);
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        /* Анимация поезда */
+        .train-container {
+            width: 100%;
+            overflow: hidden;
+            border-bottom: 2px dashed var(--neon-green);
+            margin: 30px 0;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        .train {
+            font-size: 2.5em;
+            white-space: nowrap;
+            display: inline-block;
+            animation: moveTrain 15s linear infinite;
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+
+        @keyframes moveTrain {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100vw); }
+        }
+
+        /* Контейнеры секций */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--neon-green);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: inset 0 0 10px rgba(57, 255, 20, 0.2);
+        }
+
+        /* Кнопки */
+        .btn {
+            background: transparent;
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 10px 20px;
+            font-family: inherit;
+            font-size: 1em;
+            cursor: pointer;
+            transition: 0.3s;
+            display: block;
+            margin: 10px auto;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+
+        /* Карточки Депо */
+        .depot-card {
+            border: 1px dashed var(--neon-green);
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .output-box {
+            min-height: 50px;
+            border: 1px solid #222;
+            padding: 10px;
+            margin-top: 10px;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🧪 МГЕ Science Portal 🚂</h1>
+
+    <div class="train-container">
+        <div class="train">🚂[МГЕ]===📦[Лаба]===📦[Депо]===📦[Полигон]</div>
+    </div>
+
+    <div class="grid">
+        <!-- Секция: Лаборатория -->
+        <div class="panel">
+            <h2>🔬 Лаборатория</h2>
+            <p>Генератор случайностей и фактов из чата.</p>
+            <button class="btn" onclick="generateFact()">Крутить рулетку</button>
+            <div id="fact-output" class="output-box">Ждем запуска...</div>
+        </div>
+
+        <!-- Секция: Интерактив -->
+        <div class="panel">
+            <h2>⚙️ Интерактив</h2>
+            <button class="btn" onclick="sneeze()">🤧 Чихнуть на удачу</button>
+            <div id="sneeze-output" class="output-box">Удача ждет!</div>
+            
+            <button class="btn" onclick="generateName()">Генератор МГЕ-имени</button>
+            <div id="name-output" class="output-box">Узнай свое альтер-эго</div>
+        </div>
+
+        <!-- Секция: Паровозное депо -->
+        <div class="panel">
+            <h2>🚉 Паровозное депо</h2>
+            <div class="depot-card">
+                <span>🚂 Eeeeeee</span>
+                <span>Уровень: 4</span>
+            </div>
+            <div class="depot-card">
+                <span>📡 Виталик</span>
+                <span>Уровень: MAX</span>
+            </div>
+            <div class="depot-card">
+                <span>⚙️ Гриша</span>
+                <span>Уровень: 3</span>
+            </div>
+            <div class="depot-card">
+                <span>🔧 Артур</span>
+                <span>Уровень: 3</span>
+            </div>
+        </div>
+
+        <!-- Секция: Секретный архив -->
+        <div class="panel">
+            <h2>📂 Секретный раздел</h2>
+            <p><strong>Паровозиков в час:</strong> <span id="train-counter">42</span> 📈</p>
+            <hr style="border-color: #222;">
+            <p><em>Цитата дня:</em><br> "Ферекуй! Класс!!! Прямо как во втором тим фортрес!"</p>
+            <a href="https://store.steampowered.com/app/440/Team_Fortress_2/" target="_blank" class="btn" style="text-decoration: none; text-align: center;">Войти в TF2 Полигон</a>
+            <a href="https://images.steamusercontent.com/ugc/1975420714671618224/DE8C50628443C125A4C1CACCB9CA561FFD5D7490/" target="_blank" class="btn" style="text-decoration: none; text-align: center;">Открыть Roblox Zone</a>
+        </div>
+    </div>
+
+    <script>
+        // Данные для генераторов
+        const facts = [
+            "Антон Чигур одобряет этот портал.",
+            "Обнаружена аномальная конвекция мемов в чате.",
+            "Факт: радары работают лучше, если на них наклеить стикер с локомотивом.",
+            "Внимание: уровень 'Ферекуй' превысил критическую норму!",
+            "Осторожно, двери закрываются, следующая станция — МГЕ."
+        ];
+
+        const names = [
+            "Локомотив", 
+            "Гордон Фримен", 
+            "Паровозик чух-чух", 
+            "Магистр Радаров", 
+            "Главный по Vtable",
+            "Смотритель Депо"
+        ];
+
+        // Функции
+        function generateFact() {
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+            document.getElementById('fact-output').innerText = randomFact;
+        }
+
+        function generateName() {
+            const randomName = names[Math.floor(Math.random() * names.length)];
+            document.getElementById('name-output').innerText = "Твое имя: " + randomName;
+        }
+
+        function sneeze() {
+            const diceRoll = Math.floor(Math.random() * 100) + 1;
+            let result = "";
+            if (diceRoll > 90) {
+                result = "КРИТИЧЕСКИЙ ЧИХ! Выпало " + diceRoll + ". Локомотив гудит в твою честь! 🚂🎉";
+            } else if (diceRoll < 10) {
+                result = "Чихнул на " + diceRoll + ". Ветер сдул твою кепку. 💨";
+            } else {
+                result = "Чихнул на " + diceRoll + ". Обычный день в лаборатории. 🤧";
+            }
+            document.getElementById('sneeze-output').innerText = result;
+        }
+
+        // Анимация счетчика паровозиков
+        setInterval(() => {
+            const counter = document.getElementById('train-counter');
+            let current = parseInt(counter.innerText);
+            if(Math.random() > 0.5) {
+                counter.innerText = current + Math.floor(Math.random() * 3);
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
